@@ -14,9 +14,15 @@ export default {
   state: {
     productList: [],
     current: initValues,
+    listloadng: false,
+    formloading: false,
   },
   effects: {
     *getProductList(_, { call, put }) {
+      yield put({
+        type: 'setLoding',
+        listloadng: true,
+      });
       const data = yield call(getProducts);
       if (data !== undefined && !data.error) {
         yield put({
@@ -32,6 +38,10 @@ export default {
           data: initValues,
         });
       } else {
+        yield put({
+          type: 'setLoding',
+          formloading: true,
+        });
         const data = yield call(getProduct, key);
         if (data !== undefined && !data.error) {
           yield put({
@@ -72,16 +82,24 @@ export default {
     },
   },
   reducers: {
+    setLoding(state, action) {
+      return {
+        ...state,
+        ...action,
+      };
+    },
     setProductList(state, action) {
       return {
         ...state,
         productList: action.data,
+        listloadng: false,
       };
     },
     setProductForm(state, action) {
       return {
         ...state,
         current: action.data,
+        formloading: false,
       };
     },
   },

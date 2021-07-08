@@ -8,10 +8,11 @@ import './index.less';
 import MyTable from './component/MyTable';
 import MyForm from './component/MyForm';
 import validationSchema from './util/validationSchema';
-import { dateTimeFormat } from '../utils/dataHelp';
+
+import unit from './util/Unit';
 
 const Product = ({
-  products: { current, productList },
+  products: { current, productList, listloadng, formloading },
   getList,
   getForm,
   create,
@@ -20,11 +21,9 @@ const Product = ({
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [mode, setMode] = useState('new');
-
   useEffect(() => {
     getList();
   }, []);
-
   const onEdit = (id) => {
     getForm(id);
     setMode('edit');
@@ -71,7 +70,13 @@ const Product = ({
       </Row>
       <Row>
         <Col>
-          <MyTable data={productList} onDelete={remove} onEdit={onEdit} />
+          <MyTable
+            setting={unit}
+            data={productList}
+            onDelete={remove}
+            onEdit={onEdit}
+            loading={listloadng}
+          />
         </Col>
       </Row>
       <Row
@@ -108,7 +113,7 @@ const Product = ({
           validationSchema={validationSchema}
           onSubmit={submitForm}
         >
-          <MyForm />
+          <MyForm loding={formloading} />
         </Formik>
       </Modal>
     </div>

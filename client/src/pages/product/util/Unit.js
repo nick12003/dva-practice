@@ -4,6 +4,7 @@ export default {
     pNo: {
       defaultValue: '',
       title: '商品編號',
+      type: 'text',
       form: {
         type: 'Input',
         require: true,
@@ -15,30 +16,37 @@ export default {
     pName: {
       defaultValue: '',
       title: '商品名稱',
+      type: 'text',
       form: {
         type: 'Input',
+        require: true,
       },
       list: {},
     },
     pSpec: {
       defaultValue: '',
       title: '商品規格',
+      type: 'text',
       form: {
         type: 'Input',
+        require: true,
       },
       list: {},
     },
     pQuantity: {
       defaultValue: 0,
       title: '商品數量',
+      type: 'number',
       form: {
         type: 'Input',
+        require: true,
       },
       list: {},
     },
     pDesc: {
       defaultValue: '',
       title: '商品描述',
+      type: 'text',
       form: {
         type: 'TextArea',
       },
@@ -47,66 +55,90 @@ export default {
     pWay: {
       defaultValue: 'STORE',
       title: '運送方式',
+      type: 'option',
+      option: [
+        {
+          value: 'STORE',
+          text: '超商取貨',
+        },
+        {
+          value: 'HOME',
+          text: '宅配',
+        },
+      ],
       form: {
         type: 'Radio',
       },
-      list: {
-        render: (value) => (value === 'STORE' ? '超商取貨' : '宅配'),
-      },
+      list: {},
     },
     pDate: {
       defaultValue: undefined,
       title: '上架日期',
+      type: 'datetime',
+      format: 'YYYY-MM-DD',
       form: {
-        type: '1',
+        type: 'DatePicker',
+        require: true,
       },
-      list: { render: (value) => moment(value).format('YYYY-MM-DD') },
+      list: {},
     },
     pTime: {
       defaultValue: undefined,
       title: '上架時間',
+      type: 'datetime',
+      format: 'HH:mm:ss',
       form: {
-        type: '',
+        type: 'TimePicker',
+        require: true,
       },
-      list: { render: (value) => moment(value).format('HH:mm:ss') },
+      list: {},
     },
     updateDateTime: {
       defaultValue: undefined,
       title: '修改時間',
+      type: 'datetime',
+      format: 'YYYY-MM-DD HH:mm:ss',
       form: {
-        type: '',
+        type: 'DatePicker',
       },
-      list: { render: (value) => moment(value).format('YYYY-MM-DD HH:mm:ss') },
+      list: {},
     },
     createDateTime: {
       defaultValue: undefined,
       title: '創建時間',
+      type: 'datetime',
+      format: 'YYYY-MM-DD HH:mm:ss',
       form: {
-        type: '',
+        type: 'DatePicker',
       },
-      list: { render: (value) => moment(value).format('YYYY-MM-DD HH:mm:ss') },
+      list: {},
     },
   },
-  Form: [
-    'pNo',
-    'pName',
-    'pSpec',
-    'pQuantity',
-    'pDesc',
-    'pWay',
-    'pDate',
-    'pTime',
-  ],
-  List: [
-    'pNo',
-    'pName',
-    'pSpec',
-    'pQuantity',
-    'pDesc',
-    'pWay',
-    'pDate',
-    'pTime',
-    'updateDateTime',
-    'createDateTime',
-  ],
+  Form: {
+    Fields: [
+      'pNo',
+      'pName',
+      'pSpec',
+      'pQuantity',
+      'pDesc',
+      'pWay',
+      'pDate',
+      'pTime',
+    ],
+  },
+  List: {
+    Filter: ['pNo', 'pName', 'pWay'],
+    Fields: [
+      'pNo',
+      'pName',
+      'pSpec',
+      'pQuantity',
+      'pDesc',
+      'pWay',
+      'pDate',
+      'pTime',
+      'updateDateTime',
+      'createDateTime',
+    ],
+  },
 };

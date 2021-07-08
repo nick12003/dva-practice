@@ -22,6 +22,9 @@
 # umi
 .umi
 
+#test
+test.js
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
